@@ -6,24 +6,22 @@ sidebar_label: Props
 
 ```tsx
 interface GooglePlacesAutocompleteProps {
-  apiKey?: string;                               // default: ''
-  apiOptions?: ApiOptions;                       // default: { }
+  apiKey?: string; // default: ''
+  apiOptions?: ApiOptions; // default: { }
   autocompletionRequest?: AutocompletionRequest; // default: { }
-  debounce?: number;                             // default: 300
-  minLengthAutocomplete?: number;                // default: 0
-  onLoadFailed?: (error: Error) => void;         // default: console.error
-  selectProps?: SelectProps;                     // default: { }
-  withSessionToken?: boolean;                    // default: false
+  debounce?: number; // default: 300
+  minLengthAutocomplete?: number; // default: 0
+  onLoadFailed?: (error: Error) => void; // default: console.error
+  selectProps?: SelectProps; // default: { }
+  withSessionToken?: boolean; // default: false
 }
 ```
 
 Where `SelectProps` are the ones accepted by [react-select](https://react-select.com/props).
 
-
 ## `apiKey`
 
 If this parameter is passed, the component will inject the [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/) usign this `apiKey`. So there's no need to manually add the `script` tag to yout HTML document.
-
 
 ## `apiOptions`
 
@@ -41,12 +39,11 @@ Here's an example on how to use it:
 ```jsx
 <GooglePlacesAutocomplete
   apiKey="***************"
-  apiOptions={{ language: 'fr', region: 'fr' }}
+  apiOptions={{ language: "fr", region: "fr" }}
 />
 ```
 
 **Note:** for more information check [localization documentation](https://developers.google.com/maps/documentation/javascript/localization).
-
 
 ## `autocompletionRequest`
 
@@ -62,6 +59,7 @@ interface AutocompletionRequest {
   bounds?: [LatLng, LatLng];
   componentRestrictions?: { country: string | string[] };
   location?: LatLng;
+  locationBias?: LatLng;
   offset?: number;
   radius?: number;
   types?: string[];
@@ -75,38 +73,36 @@ Here's an example on how to use it:
   autocompletionRequest={{
     bounds: [
       { lat: 50, lng: 50 },
-      { lat: 100, lng: 100 }
+      { lat: 100, lng: 100 },
     ],
     componentRestrictions: {
-    country: ['us', 'ca', 'uy'],
-    }
+      country: ["us", "ca", "uy"],
+    },
   }}
 />
 ```
 
 **Note:** for more information check [google documentation](https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest).
 
-
 ## `debounce`
 
 The number of milliseconds to delay before making a call to Google Maps API.
 
-
 ## `minLengthAutocomplete`
 
 Defines a minimum number of characters needed on the input in order to make requests to the Google's API.
-
 
 ## `onLoadFailed`
 
 Function to be called when the injection of the [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/) fails due to network error.
 
 For example:
+
 ```jsx
 <GooglePlacesAutocomplete
-  onLoadFailed={(error) => (
+  onLoadFailed={(error) =>
     console.error("Could not inject Google script", error)
-  )}
+  }
 />
 ```
 
@@ -115,6 +111,7 @@ For example:
 As this component uses [react-select](https://react-select.com) under the hood, this prop accepts everything that's accepted by it. You can check [react-select props here](https://react-select.com/props).
 
 For example, a really common use would be to use it as a controlled input:
+
 ```jsx
 const [value, setValue] = useState(null);
 
@@ -123,7 +120,7 @@ const [value, setValue] = useState(null);
     value,
     onChange: setValue,
   }}
-/>
+/>;
 ```
 
 ## `withSessionToken`

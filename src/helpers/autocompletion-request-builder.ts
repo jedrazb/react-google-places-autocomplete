@@ -5,7 +5,7 @@ export default (
   input: string,
   sessionToken?: google.maps.places.AutocompleteSessionToken,
 ): google.maps.places.AutocompletionRequest => {
-  const { bounds, location, ...rest } = autocompletionRequest;
+  const { bounds, location, locationBias, ...rest } = autocompletionRequest;
 
   const res: google.maps.places.AutocompletionRequest= {
     input,
@@ -22,6 +22,10 @@ export default (
 
   if (location) {
     res.location = new google.maps.LatLng(location);
+  }
+
+  if (locationBias) {
+    res.locationBias = new google.maps.LatLng(locationBias);
   }
 
   return res;
